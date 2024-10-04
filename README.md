@@ -39,4 +39,12 @@ Clone or Download this repository.
 Open index.html in any modern web browser.
 Begin the quiz by answering questions and navigating through them.
 After the last question, view your score, and use the restart button to retake the quiz.
+
+
+## output of project
+![CODTECH--TASK-2_create task 2 at main · balamohann45_CODTECH--TASK-2 - Google Chrome 04-10-2024 16_06_50](https://github.com/user-attachments/assets/49e2665c-e39e-482f-a04b-3a3273cbd016)
+
+
+
+
   
