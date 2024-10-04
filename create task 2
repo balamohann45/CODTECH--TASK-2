@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz Application</title>
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            margin: 0;
+        }
+
+        .quiz-container {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #e7e7e7;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .options button:hover {
+            background-color: #ddd;
+        }
+
+        #next-btn {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2 id="question">Question text</h2>
+    <div class="options">
+        <button onclick="checkAnswer(0)">Option 1</button>
+        <button onclick="checkAnswer(1)">Option 2</button>
+        <button onclick="checkAnswer(2)">Option 3</button>
+        <button onclick="checkAnswer(3)">Option 4</button>
+    </div>
+    <button id="next-btn" onclick="nextQuestion()">Next</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    const questions = [
+        {
+            question: "What is the capital of France?",
+            options: ["Berlin", "Madrid", "Paris", "Lisbon"],
+            answer: 2
+        },
+        {
+            question: "Which language is primarily used for web development?",
+            options: ["Python", "JavaScript", "C++", "Java"],
+            answer: 1
+        },
+        {
+            question: "Who wrote 'Hamlet'?",
+            options: ["Shakespeare", "Hemingway", "Tolkien", "Dickens"],
+            answer: 0
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+        // Clear previous feedback
+        document.getElementById("result").textContent = "";
+        
+        // Load current question
+        const q = questions[currentQuestion];
+        document.getElementById("question").textContent = q.question;
+        document.querySelectorAll(".options button").forEach((button, index) => {
+            button.textContent = q.options[index];
+        });
+    }
+
+    function checkAnswer(selectedOption) {
+        // Check if selected answer is correct
+        if (selectedOption === questions[currentQuestion].answer) {
+            score++;
+            document.getElementById("result").textContent = "Correct!";
+        } else {
+            document.getElementById("result").textContent = "Wrong!";
+        }
+    }
+
+    function nextQuestion() {
+        // Move to the next question or display the final score
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            loadQuestion();
+        } else {
+            document.querySelector(".quiz-container").innerHTML = `
+                <h2>Your score is: ${score}/${questions.length}</h2>
+            `;
+        }
+    }
+
+    // Load the first question when the page loads
+    loadQuestion();
+</script>
+
+</body>
+</html>
